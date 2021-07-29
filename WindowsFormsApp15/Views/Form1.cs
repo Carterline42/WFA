@@ -87,13 +87,18 @@ namespace WindowsFormsApp15
 
         private void treeView2_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            TreeNode treeNode = e.Node;
-            if (SetConstantValues(treeNode) == true)
-                return;
+            try
+            {
 
-            Node node = _nodeStore.GetItem(Convert.ToInt32(treeNode.Tag));
-            SetConstantValues(node);
-            Init(treeNode);
+                TreeNode treeNode = e.Node;
+                if (SetConstantValues(treeNode) == true)
+                    return;
+
+                Node node = _nodeStore.GetItem(Convert.ToInt32(treeNode.Tag));
+                SetConstantValues(node);
+                Init(treeNode);
+            }
+            catch { }
         }
 
         /// <summary>
@@ -105,7 +110,8 @@ namespace WindowsFormsApp15
         {
             try
             {
-                
+                if (string.IsNullOrWhiteSpace(txtSurname.Text) || string.IsNullOrWhiteSpace(txtName.Text))
+                    throw new Exception();
                 var currNode = treeView2.SelectedNode;
 
                 Employee employee = new Employee
@@ -135,21 +141,29 @@ namespace WindowsFormsApp15
         }
         private void Init(TreeNode node)
         {
-            var item = _employeeStore.GetItem(node);
-            if (item == null)
-            {
-                txtSurname.Text = string.Empty;
-                txtName.Text = string.Empty;
-                txtPatronomyc.Text = string.Empty;
-                pickerAdoptionDate.Value = DateTime.Now;
-            }
-            else
+            try
             {
 
-                txtSurname.Text = item.Surname;
-                txtName.Text = item.Name;
-                txtPatronomyc.Text = item.Patronomyc;
-                pickerAdoptionDate.Value = item.DateOfAdoption;
+                var item = _employeeStore.GetItem(node);
+                if (item == null)
+                {
+                    txtSurname.Text = string.Empty;
+                    txtName.Text = string.Empty;
+                    txtPatronomyc.Text = string.Empty;
+                    pickerAdoptionDate.Value = DateTime.Now;
+                }
+                else
+                {
+
+                    txtSurname.Text = item.Surname;
+                    txtName.Text = item.Name;
+                    txtPatronomyc.Text = item.Patronomyc;
+                    pickerAdoptionDate.Value = item.DateOfAdoption;
+                }
+            }
+            catch
+            {
+
             }
         }
 
