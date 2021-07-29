@@ -1,1 +1,1 @@
-Использовал ORM LinqToSql поскольку с мне ним удобнее работать на .NET Framework. 
+Использовал ORM LinqToSql поскольку мне с ним удобнее работать на .NET Framework. 
