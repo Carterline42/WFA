@@ -17,6 +17,11 @@ namespace WindowsFormsApp15
             InitializeComponent();
 
             tree.Init(treeView2);
+
+            foreach(Control control in panel3.Controls)
+            {
+                control.Visible = false;
+            }
         }
 
         private void lblOpenAddForm_Click(object sender, EventArgs e)
