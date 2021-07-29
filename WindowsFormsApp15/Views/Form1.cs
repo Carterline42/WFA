@@ -17,11 +17,10 @@ namespace WindowsFormsApp15
             InitializeComponent();
 
             tree.Init(treeView2);
-
-            foreach(Control control in panel3.Controls)
-            {
-                control.Visible = false;
-            }
+            treeView2.SelectedNode = treeView2.Nodes[0];
+            SetControlVisible(lblOpenAddForm, true);
+            SetPanelVisible(employeePanel, false);
+            SetPanelVisible(nodePanel, false);
         }
 
         private void lblOpenAddForm_Click(object sender, EventArgs e)
@@ -94,14 +93,36 @@ namespace WindowsFormsApp15
         {
             try
             {
-
-                TreeNode treeNode = e.Node;
-                if (SetConstantValues(treeNode) == true)
+                var currentTreeNode = e.Node;
+                if (currentTreeNode.Name == "readonlyCoreNode")
+                {
+                    
+                    SetControlVisible(lblOpenAddForm, true);
+                    SetPanelVisible(nodePanel, false);
+                    SetPanelVisible(employeePanel, false);
                     return;
+                }
 
-                Node node = _nodeStore.GetItem(Convert.ToInt32(treeNode.Tag));
-                SetConstantValues(node);
-                Init(treeNode);
+                var node = _nodeStore.GetItem(Convert.ToInt32(currentTreeNode.Tag));
+
+                if (node != null)
+                {
+
+                    if (node.Type == "Должность")
+                    {
+                        SetControlVisible(lblOpenAddForm, false);
+                        SetPanelVisible(nodePanel, true);
+                        SetPanelVisible(employeePanel, true);
+                        return;
+                    }
+                    else if(node.Type == "Подразделение")
+                    {
+                        SetControlVisible(lblOpenAddForm, true);
+                        SetPanelVisible(nodePanel, true);
+                        SetPanelVisible(employeePanel, false);
+                        return;
+                    }
+                }
             }
             catch { }
         }
@@ -171,34 +192,6 @@ namespace WindowsFormsApp15
 
             }
         }
-
-        #region Методы инициализации скрытия/открытия
-        private bool SetConstantValues(TreeNode treeNode)
-        {
-            if (Convert.ToInt32(treeNode.Tag) == 0)
-            {
-                SetPanelVisible(panel4, false);
-                return true;
-            }
-            SetPanelVisible(panel4, true);
-            return false;
-        }
-        private void SetConstantValues(Node node)
-        {
-            if (node.Type == "Подразделение")
-            {
-                SetControlVisible(lblOpenAddForm, true);
-                SetPanelVisible(panel3, false);
-                return;
-            }
-            if (node.Type == "Должность")
-            {
-                SetControlVisible(lblOpenAddForm, false);
-                SetPanelVisible(panel3, true);
-            }
-        }
-
-        #endregion
 
         #region Методы реализующие скрытие/открытие элементов управления
 

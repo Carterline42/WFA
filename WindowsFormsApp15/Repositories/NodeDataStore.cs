@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Linq;
 using System.Linq;
+using System.Windows.Forms;
 using WindowsFormsApp15.Data;
 using WindowsFormsApp15.Models;
 
@@ -31,7 +33,6 @@ namespace WindowsFormsApp15.Repositories
         {
             return _nodes.Single(x => x.Id == id);
         }
-
         public IEnumerable<Node> GetItems()
         {
             return _nodes.ToList();

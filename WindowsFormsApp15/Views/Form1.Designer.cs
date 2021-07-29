@@ -32,11 +32,11 @@ namespace WindowsFormsApp15
             System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Заводоуправление");
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.nodePanel = new System.Windows.Forms.Panel();
             this.lblOpenUpdateForm = new System.Windows.Forms.Label();
             this.lblRemoveNode = new System.Windows.Forms.Label();
             this.lblOpenAddForm = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.employeePanel = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.txtSurname = new System.Windows.Forms.TextBox();
@@ -51,8 +51,8 @@ namespace WindowsFormsApp15
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel3.SuspendLayout();
+            this.nodePanel.SuspendLayout();
+            this.employeePanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -68,9 +68,9 @@ namespace WindowsFormsApp15
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.panel4);
+            this.panel2.Controls.Add(this.nodePanel);
             this.panel2.Controls.Add(this.lblOpenAddForm);
-            this.panel2.Controls.Add(this.panel3);
+            this.panel2.Controls.Add(this.employeePanel);
             this.panel2.Controls.Add(this.treeView2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
@@ -78,14 +78,14 @@ namespace WindowsFormsApp15
             this.panel2.Size = new System.Drawing.Size(462, 381);
             this.panel2.TabIndex = 3;
             // 
-            // panel4
+            // nodePanel
             // 
-            this.panel4.Controls.Add(this.lblOpenUpdateForm);
-            this.panel4.Controls.Add(this.lblRemoveNode);
-            this.panel4.Location = new System.Drawing.Point(55, 3);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(55, 28);
-            this.panel4.TabIndex = 14;
+            this.nodePanel.Controls.Add(this.lblOpenUpdateForm);
+            this.nodePanel.Controls.Add(this.lblRemoveNode);
+            this.nodePanel.Location = new System.Drawing.Point(55, 3);
+            this.nodePanel.Name = "nodePanel";
+            this.nodePanel.Size = new System.Drawing.Size(55, 28);
+            this.nodePanel.TabIndex = 14;
             // 
             // lblOpenUpdateForm
             // 
@@ -123,21 +123,21 @@ namespace WindowsFormsApp15
             this.lblOpenAddForm.Text = "+";
             this.lblOpenAddForm.Click += new System.EventHandler(this.lblOpenAddForm_Click);
             // 
-            // panel3
+            // employeePanel
             // 
-            this.panel3.Controls.Add(this.button1);
-            this.panel3.Controls.Add(this.label4);
-            this.panel3.Controls.Add(this.txtSurname);
-            this.panel3.Controls.Add(this.label2);
-            this.panel3.Controls.Add(this.txtName);
-            this.panel3.Controls.Add(this.pickerAdoptionDate);
-            this.panel3.Controls.Add(this.label3);
-            this.panel3.Controls.Add(this.label5);
-            this.panel3.Controls.Add(this.txtPatronomyc);
-            this.panel3.Location = new System.Drawing.Point(185, 31);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(274, 298);
-            this.panel3.TabIndex = 13;
+            this.employeePanel.Controls.Add(this.button1);
+            this.employeePanel.Controls.Add(this.label4);
+            this.employeePanel.Controls.Add(this.txtSurname);
+            this.employeePanel.Controls.Add(this.label2);
+            this.employeePanel.Controls.Add(this.txtName);
+            this.employeePanel.Controls.Add(this.pickerAdoptionDate);
+            this.employeePanel.Controls.Add(this.label3);
+            this.employeePanel.Controls.Add(this.label5);
+            this.employeePanel.Controls.Add(this.txtPatronomyc);
+            this.employeePanel.Location = new System.Drawing.Point(185, 31);
+            this.employeePanel.Name = "employeePanel";
+            this.employeePanel.Size = new System.Drawing.Size(274, 298);
+            this.employeePanel.TabIndex = 13;
             // 
             // button1
             // 
@@ -255,10 +255,10 @@ namespace WindowsFormsApp15
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
+            this.nodePanel.ResumeLayout(false);
+            this.nodePanel.PerformLayout();
+            this.employeePanel.ResumeLayout(false);
+            this.employeePanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -280,8 +280,8 @@ namespace WindowsFormsApp15
         private System.Windows.Forms.Label lblRemoveNode;
         private System.Windows.Forms.Label lblOpenUpdateForm;
         private System.Windows.Forms.Label lblOpenAddForm;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel nodePanel;
+        private System.Windows.Forms.Panel employeePanel;
         private System.Windows.Forms.TreeView treeView2;
         private System.Windows.Forms.Button button1;
     }

@@ -18,7 +18,6 @@ namespace WindowsFormsApp15.Views
         {
             InitializeComponent();
             _node = node;
-          
             Init();
         }
         private void Init()
