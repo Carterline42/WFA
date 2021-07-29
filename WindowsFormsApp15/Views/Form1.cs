@@ -89,6 +89,13 @@ namespace WindowsFormsApp15
             }
         }
 
+        private void SetDefaultValues(DateTime date, string surname = "", string name ="", string patronomyc="")
+        {
+            txtSurname.Text = surname;
+            txtName.Text = surname;
+            txtPatronomyc.Text = surname;
+            pickerAdoptionDate.Value = DateTime.Now;
+        }
         private void treeView2_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             try
@@ -107,12 +114,18 @@ namespace WindowsFormsApp15
 
                 if (node != null)
                 {
+                    SetDefaultValues(DateTime.Now);
 
                     if (node.Type == "Должность")
                     {
                         SetControlVisible(lblOpenAddForm, false);
                         SetPanelVisible(nodePanel, true);
                         SetPanelVisible(employeePanel, true);
+
+                        var employee = _employeeStore.GetItem(currentTreeNode);
+                        if(employee != null)
+                            SetDefaultValues(employee.DateOfAdoption, employee.Surname, employee.Name, employee.Patronomyc);
+
                         return;
                     }
                     else if(node.Type == "Подразделение")
@@ -138,15 +151,17 @@ namespace WindowsFormsApp15
             {
                 if (string.IsNullOrWhiteSpace(txtSurname.Text) || string.IsNullOrWhiteSpace(txtName.Text))
                     throw new Exception();
+
+
                 var currNode = treeView2.SelectedNode;
 
                 Employee employee = new Employee
                 {
-                    NodeId = Convert.ToInt32(currNode.Tag),
                     Surname = txtSurname.Text,
                     Name = txtName.Text,
                     Patronomyc = txtPatronomyc.Text,
-                    DateOfAdoption = pickerAdoptionDate.Value
+                    DateOfAdoption = pickerAdoptionDate.Value,
+                    NodeId = Convert.ToInt32(currNode.Tag)
                 };
 
                 if (_employeeStore.GetItem(currNode) != null)
