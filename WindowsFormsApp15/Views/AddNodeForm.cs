@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using WindowsFormsApp15.Models;
@@ -12,7 +11,8 @@ namespace WindowsFormsApp15.Views
         #region fields
         private TreeNode _node;
         private NodeDataStore _store;
-        private Tree _tree;
+        private NodeTypeDataStore _typeStore;
+
         #endregion
         public AddNodeForm(TreeNode node)
         {
@@ -22,11 +22,9 @@ namespace WindowsFormsApp15.Views
         }
         private void Init()
         {
-            comboBox1.Items.Add("Подразделение");
-            comboBox1.Items.Add("Должность");
-
             _store = new NodeDataStore();
-            _tree = new Tree();
+            _typeStore = new NodeTypeDataStore();
+            comboBox1.DataSource = _typeStore.GetItems();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -36,10 +34,14 @@ namespace WindowsFormsApp15.Views
                 if (comboBox1.SelectedItem == null || string.IsNullOrWhiteSpace(textBox1.Text))
                     throw new ArgumentNullException();
 
+
+                string selectedType = comboBox1.SelectedItem.ToString();
+                NodeType nodeType = _typeStore.GetItem(selectedType);
+
                 Node node = new Node
                 {
                     Title = textBox1.Text,
-                    Type = comboBox1.SelectedItem.ToString(),
+                    Type = nodeType.Id,
                     ParentId = Convert.ToInt32(_node.Tag)
                 };
                 _store.AddItem(node);
@@ -64,6 +66,6 @@ namespace WindowsFormsApp15.Views
             TreeNode childNode = new TreeNode { Text = node.Title, Tag = Convert.ToInt32(node.Id), };
             _node.Nodes.Add(childNode);
         }
-        
+
     }
 }

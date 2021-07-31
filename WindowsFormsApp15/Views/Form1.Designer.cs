@@ -49,6 +49,8 @@ namespace WindowsFormsApp15
             this.treeView2 = new System.Windows.Forms.TreeView();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.nodePanel.SuspendLayout();
@@ -125,6 +127,8 @@ namespace WindowsFormsApp15
             // 
             // employeePanel
             // 
+            this.employeePanel.Controls.Add(this.button3);
+            this.employeePanel.Controls.Add(this.button2);
             this.employeePanel.Controls.Add(this.button1);
             this.employeePanel.Controls.Add(this.label4);
             this.employeePanel.Controls.Add(this.txtSurname);
@@ -141,7 +145,7 @@ namespace WindowsFormsApp15
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(190, 162);
+            this.button1.Location = new System.Drawing.Point(6, 162);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 10;
@@ -243,6 +247,25 @@ namespace WindowsFormsApp15
             this.textBox1.Size = new System.Drawing.Size(165, 20);
             this.textBox1.TabIndex = 1;
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(100, 162);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 11;
+            this.button2.Text = "Очистить";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(192, 162);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 12;
+            this.button3.Text = "Выбрать";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -284,6 +307,8 @@ namespace WindowsFormsApp15
         private System.Windows.Forms.Panel employeePanel;
         private System.Windows.Forms.TreeView treeView2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
 

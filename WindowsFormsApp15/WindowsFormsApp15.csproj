@@ -77,10 +77,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Connect.cs" />
-    <Compile Include="Models\Node.cs" />
-    <Compile Include="Repositories\EmployeeDataStore.cs" />
+    <Compile Include="Models\Employee\EmployeeCatalog.cs" />
+    <Compile Include="Models\Node\Node.cs" />
+    <Compile Include="Models\Node\NodeType.cs" />
+    <Compile Include="Repositories\Employee\EmployeeCatalogDataStore.cs" />
+    <Compile Include="Repositories\Employee\EmployeeDataStore.cs" />
     <Compile Include="Repositories\IDataStore.cs" />
-    <Compile Include="Repositories\NodeDataStore.cs" />
+    <Compile Include="Repositories\Node\NodeDataStore.cs" />
+    <Compile Include="Repositories\Node\NodeTypeDataStore.cs" />
     <Compile Include="Views\AddNodeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,7 +97,7 @@
     <Compile Include="Views\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\Employee\Employee.cs" />
     <Compile Include="Models\Tree.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

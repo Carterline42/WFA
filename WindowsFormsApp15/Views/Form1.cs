@@ -10,19 +10,27 @@ namespace WindowsFormsApp15
     {
 
         private Tree tree = new Tree();
-        private NodeDataStore _nodeStore = new NodeDataStore();
-        private EmployeeDataStore _employeeStore = new EmployeeDataStore();
+        private NodeDataStore _nodeStore;
+        private EmployeeDataStore _employeeStore;
+        private NodeTypeDataStore _typeStore;
         public Form1()
         {
             InitializeComponent();
 
+            Init();
             tree.Init(treeView2);
+
             treeView2.SelectedNode = treeView2.Nodes[0];
             SetControlVisible(lblOpenAddForm, true);
             SetPanelVisible(employeePanel, false);
             SetPanelVisible(nodePanel, false);
         }
-
+        private void Init()
+        {
+            _nodeStore = new NodeDataStore();
+            _employeeStore = new EmployeeDataStore();
+            _typeStore = new NodeTypeDataStore();
+        }
         private void lblOpenAddForm_Click(object sender, EventArgs e)
         {
             try
@@ -48,7 +56,10 @@ namespace WindowsFormsApp15
                 if (treeView2.SelectedNode == null)
                     throw new ArgumentNullException();
 
-                if (MessageBox.Show("Вы действительно хотите удалить этот узел?") == DialogResult.OK)
+
+                var result = MessageBox.Show("Вы действительно хотите удалить этот узел?");
+
+                if (result == DialogResult.OK)
                 {
 
                     var selectedNode = treeView2.SelectedNode;
@@ -57,6 +68,8 @@ namespace WindowsFormsApp15
                     _nodeStore.RemoveItem(Convert.ToInt32(selectedNode.Tag));
 
                 }
+                else if (result == DialogResult.Cancel)
+                    return;
             }
             catch (ArgumentException)
             {
@@ -89,13 +102,20 @@ namespace WindowsFormsApp15
             }
         }
 
-        private void SetDefaultValues(DateTime date, string surname = "", string name ="", string patronomyc="")
+        private void SetDefaultValues(DateTime date, string surname = "", string name = "", string patronomyc = "")
         {
             txtSurname.Text = surname;
             txtName.Text = surname;
             txtPatronomyc.Text = surname;
             pickerAdoptionDate.Value = DateTime.Now;
         }
+
+
+        /// <summary>
+        /// Скрывает элементы управления в зависимости от выбранного узла (проверяется по типу узла)
+        /// Если тип узла является "Подразделение", то доступно добавиление, удаление, редактирование узла
+        /// Если тип узла является "Должность", то будет доступно только удаление и редактирование
+        /// </summary>
         private void treeView2_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             try
@@ -103,7 +123,7 @@ namespace WindowsFormsApp15
                 var currentTreeNode = e.Node;
                 if (currentTreeNode.Name == "readonlyCoreNode")
                 {
-                    
+
                     SetControlVisible(lblOpenAddForm, true);
                     SetPanelVisible(nodePanel, false);
                     SetPanelVisible(employeePanel, false);
@@ -116,19 +136,19 @@ namespace WindowsFormsApp15
                 {
                     SetDefaultValues(DateTime.Now);
 
-                    if (node.Type == "Должность")
+                    if (node.Type == _typeStore.GetItem("Должность").Id)
                     {
                         SetControlVisible(lblOpenAddForm, false);
                         SetPanelVisible(nodePanel, true);
                         SetPanelVisible(employeePanel, true);
 
                         var employee = _employeeStore.GetItem(currentTreeNode);
-                        if(employee != null)
+                        if (employee != null)
                             SetDefaultValues(employee.DateOfAdoption, employee.Surname, employee.Name, employee.Patronomyc);
 
                         return;
                     }
-                    else if(node.Type == "Подразделение")
+                    else if (node.Type == _typeStore.GetItem("Подразделение").Id)
                     {
                         SetControlVisible(lblOpenAddForm, true);
                         SetPanelVisible(nodePanel, true);
@@ -180,34 +200,20 @@ namespace WindowsFormsApp15
             }
 
         }
-        private void Init(TreeNode node)
+
+        //Очистка узла с типом "Должность" (удаляет работника из таблицы Employees)
+        private void button2_Click(object sender, EventArgs e)
         {
-            try
+            var currNode = treeView2.SelectedNode;
+
+            var dbItem = _employeeStore.GetItem(currNode);
+
+            if (dbItem != null)
             {
-
-                var item = _employeeStore.GetItem(node);
-                if (item == null)
-                {
-                    txtSurname.Text = string.Empty;
-                    txtName.Text = string.Empty;
-                    txtPatronomyc.Text = string.Empty;
-                    pickerAdoptionDate.Value = DateTime.Now;
-                }
-                else
-                {
-
-                    txtSurname.Text = item.Surname;
-                    txtName.Text = item.Name;
-                    txtPatronomyc.Text = item.Patronomyc;
-                    pickerAdoptionDate.Value = item.DateOfAdoption;
-                }
-            }
-            catch
-            {
-
+                _employeeStore.RemoveItem(dbItem.Id);
+                SetDefaultValues(DateTime.Now);
             }
         }
-
         #region Методы реализующие скрытие/открытие элементов управления
 
         private void SetPanelVisible(Panel panel, bool visible)
