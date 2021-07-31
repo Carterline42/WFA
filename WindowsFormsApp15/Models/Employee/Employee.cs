@@ -4,7 +4,7 @@ using System.Data.Linq.Mapping;
 namespace WindowsFormsApp15.Models
 {
     [Table(Name = "Employees")]
-    class Employee
+    public class Employee
     {
         [Column(IsDbGenerated = true, IsPrimaryKey = true)]
         public int Id { get; set; }

@@ -50,7 +50,7 @@ namespace WindowsFormsApp15.Repositories
         {
             return _employees.ToList();
         }
-
+        
         public bool RemoveItem(int id)
         {
             var item = GetItem(id);
@@ -72,7 +72,7 @@ namespace WindowsFormsApp15.Repositories
             newItem.Name = item.Name;
             newItem.Patronomyc = item.Patronomyc;
             newItem.DateOfAdoption = item.DateOfAdoption;
-
+            newItem.NodeId = item.NodeId;
             _dc.SubmitChanges();
             return true;
         }

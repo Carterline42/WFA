@@ -77,10 +77,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Connect.cs" />
-    <Compile Include="Models\Employee\EmployeeCatalog.cs" />
     <Compile Include="Models\Node\Node.cs" />
     <Compile Include="Models\Node\NodeType.cs" />
-    <Compile Include="Repositories\Employee\EmployeeCatalogDataStore.cs" />
     <Compile Include="Repositories\Employee\EmployeeDataStore.cs" />
     <Compile Include="Repositories\IDataStore.cs" />
     <Compile Include="Repositories\Node\NodeDataStore.cs" />
@@ -101,6 +99,12 @@
     <Compile Include="Models\Tree.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\SelectEmployeeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\SelectEmployeeForm.Designer.cs">
+      <DependentUpon>SelectEmployeeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UpdateNodeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,6 +126,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\SelectEmployeeForm.resx">
+      <DependentUpon>SelectEmployeeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UpdateNodeForm.resx">
       <DependentUpon>UpdateNodeForm.cs</DependentUpon>
     </EmbeddedResource>

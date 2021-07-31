@@ -105,8 +105,8 @@ namespace WindowsFormsApp15
         private void SetDefaultValues(DateTime date, string surname = "", string name = "", string patronomyc = "")
         {
             txtSurname.Text = surname;
-            txtName.Text = surname;
-            txtPatronomyc.Text = surname;
+            txtName.Text = name;
+            txtPatronomyc.Text = patronomyc;
             pickerAdoptionDate.Value = DateTime.Now;
         }
 
@@ -204,9 +204,9 @@ namespace WindowsFormsApp15
         //Очистка узла с типом "Должность" (удаляет работника из таблицы Employees)
         private void button2_Click(object sender, EventArgs e)
         {
-            var currNode = treeView2.SelectedNode;
+            var currentNode = treeView2.SelectedNode;
 
-            var dbItem = _employeeStore.GetItem(currNode);
+            var dbItem = _employeeStore.GetItem(currentNode);
 
             if (dbItem != null)
             {
@@ -229,5 +229,13 @@ namespace WindowsFormsApp15
         }
         #endregion
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var currentNode = treeView2.SelectedNode;
+            var employee = _employeeStore.GetItem(currentNode);
+
+            SelectEmployeeForm form = new SelectEmployeeForm(currentNode, employee);
+            form.Show();
+        }
     }
 }

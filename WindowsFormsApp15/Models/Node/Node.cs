@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.Data.Linq.Mapping;
+﻿using System.Data.Linq.Mapping;
 
 namespace WindowsFormsApp15.Models
 {
